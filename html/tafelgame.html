@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Tafeltoren/css/style.css">
+    <title>Tafeltoren</title>
+</head>
+
+<body>
+
+    <h2>Tafeltoren</h2>
+    <div id="mainGame" class="maingameStyle">
+        <h2>
+            <span>
+                <span id="vraag">vraag</span>
+                <span id="getal1">0</span>
+                <span id="op">x</span>
+                <span id="getal2">0</span>
+                <span>=</span>
+                <span id="antwoord">Antwoord</span>
+                <input class="input" id="number" type="number" value="">
+                <button class="button" id="submit" type="submit" onclick="controleerAntwoord()">Controleer</button>
+                <a href="index.html" class="button">Reset game</a>
+                <a href="tafelgame.html" class="button">Reset tafel</a>
+                <button class="button" id="submit" type="submit" onclick="question()">Volgende vraag</button>
+                <span id="score">score: 0</span>
+            </span>
+        </h2>
+
+    </div>
+
+    <script src="/Tafeltoren/js/tafel.js"></script>
+</body>
+
+</html>
