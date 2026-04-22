@@ -1,37 +1,95 @@
 <!DOCTYPE html>
 <html lang="nl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Tafeltoren/css/style.css">
     <title>Tafeltoren</title>
-</head>
 
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/tafelgame.css">
+</head>
 <body>
 
-    <h2>Tafeltoren</h2>
-    <div id="mainGame" class="maingameStyle">
-        <h2>
-            <span>
-                <span id="vraag">vraag</span>
-                <span id="getal1">0</span>
-                <span id="op">x</span>
-                <span id="getal2">0</span>
-                <span>=</span>
-                <span id="antwoord">Antwoord</span>
-                <input class="input" id="number" type="number" value="">
-                <button class="button" id="submit" type="submit" onclick="controleerAntwoord()">Controleer</button>
-                <a href="index.html" class="button">Reset game</a>
-                <a href="tafelgame.html" class="button">Reset tafel</a>
-                <button class="button" id="submit" type="submit" onclick="question()">Volgende vraag</button>
-                <span id="score">score: 0</span>
-            </span>
-        </h2>
+    <!-- Level omhoog -->
+    <div id="level-up-overlay" class="level-up-overlay">
+        <div class="level-up-content">
+            <span class="level-up-emoji">🎉</span>
+            <span id="level-omhoog-tekst" class="level-up-title">Level 2</span>
+            <span id="level-omhoog-naam" class="level-up-naam">Leerling</span>
+            <button class="button" style="margin-top: 25px;" onclick="sluitLevelOverlay()">🚀 Volgende Level!</button>
+        </div>
+    </div>
+
+    <!-- Game Card -->
+    <div class="game-card">
+
+        <h2 class="game-title">Tafeltoren</h2>
+
+        <div class="top-info-bar">
+            <div class="info-left">
+                <span id="level-display" class="level-badge">Level 1 - Beginner</span>
+                <span id="health" class="health-badge">❤️❤️❤️</span>
+            </div>
+            <div class="info-right">
+                <span id="score" class="score-badge">⭐ Score: 0</span>
+            </div>
+        </div>
+
+        <!-- Voortgang en Timer -->
+        <div class="status-row">
+            <div class="progress-container">
+                <span id="vraag-teller" class="vraag-teller">Vraag: 0 / 10</span>
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+            </div>
+            <div class="timer-container">
+                <span id="timer" class="timer-text">30s</span>
+                <div class="timer-bar">
+                    <div id="timer-fill" class="timer-fill"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vraag -->
+        <div class="question-display">
+            <div class="math-problem">
+                <span id="getal1" class="math-number">0</span>
+                <span class="math-operator">×</span>
+                <span id="getal2" class="math-number">0</span>
+                <span class="math-equals">=</span>
+                <span id="antwoord" class="math-answer">?</span>
+            </div>
+        </div>
+
+        <!-- Invoer gedeelte -->
+        <div class="input-area">
+            <input 
+                class="input" 
+                id="number" 
+                type="number" 
+                placeholder="..." 
+                autocomplete="off"
+                autofocus
+            >
+            <button class="button" onclick="controleerAntwoord()">✓ Controleer</button>
+        </div>
+
+        <!-- Feedback -->
+        <div id="feedback-tekst" class="feedback-tekst"></div>
+
+        <!-- Knoppen -->
+        <div class="button-group">
+            <button class="button button-secondary" onclick="volgendeVraag()">⏭ Volgende</button>
+            <a href="tafelgame.html" class="button button-secondary">🔄 Reset</a>
+            <a href="index.html" class="button button-secondary">🏠 Menu</a>
+        </div>
 
     </div>
 
-    <script src="/Tafeltoren/js/tafel.js"></script>
-</body>
+    <!-- Script -->
+    <script src="../js/tafel.js"></script>
 
+</body>
 </html>

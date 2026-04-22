@@ -1,16 +1,249 @@
+/* ===== Google Font ===== */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap');
+
+/* ===== CSS Custom Properties ===== */
+:root {
+  --clr-bg-1: #0f0c29;
+  --clr-bg-2: #302b63;
+  --clr-bg-3: #24243e;
+  --clr-accent: #00d2ff;
+  --clr-accent-2: #7b2ff7;
+  --clr-card: rgba(255, 255, 255, 0.08);
+  --clr-card-border: rgba(255, 255, 255, 0.15);
+  --clr-text: #f0f0f0;
+  --clr-text-muted: rgba(255, 255, 255, 0.6);
+  --clr-success: #00e676;
+  --clr-danger: #ff5252;
+  --radius: 20px;
+  --shadow-glow: 0 0 30px rgba(0, 210, 255, 0.15), 0 0 60px rgba(123, 47, 247, 0.1);
+}
+
+/* ===== Reset & Base ===== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
 body {
-  background-color: #04f8cf;
+  font-family: 'Outfit', sans-serif;
+  color: var(--clr-text);
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--clr-bg-1) 0%, var(--clr-bg-2) 50%, var(--clr-bg-3) 100%);
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  position: relative;
 }
 
-header {
+/* Animated floating orbs background */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  z-index: 0;
+  pointer-events: none;
+}
+
+body::before {
+  width: 400px;
+  height: 400px;
+  background: var(--clr-accent);
+  top: -100px;
+  right: -100px;
+  animation: floatOrb1 8s ease-in-out infinite alternate;
+}
+
+body::after {
+  width: 350px;
+  height: 350px;
+  background: var(--clr-accent-2);
+  bottom: -80px;
+  left: -80px;
+  animation: floatOrb2 10s ease-in-out infinite alternate;
+}
+
+@keyframes floatOrb1 {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-60px, 80px) scale(1.15); }
+}
+
+@keyframes floatOrb2 {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(70px, -90px) scale(1.2); }
+}
+
+/* ===== Header / Card Container ===== */
+header,
+.game-card {
+  position: relative;
+  z-index: 1;
+  background: var(--clr-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--clr-card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-glow);
+  padding: 50px 60px;
   text-align: center;
-  margin-top: 200px;
-  background-color: lightskyblue;
-  border-radius: 50px;
-  padding: 40px 0;
-  box-shadow: 2px 2px turquoise;
+  max-width: 520px;
+  width: 90%;
+  animation: fadeSlideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===== Typography ===== */
+h1, .h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, var(--clr-accent), var(--clr-accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 12px;
+  text-shadow: none;
+}
+
+h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  margin-bottom: 24px;
+}
+
+/* ===== Buttons ===== */
+/*
+Source - https://stackoverflow.com/a/710108
+Posted by TStamper, modified by community. See post 'Timeline' for change history
+Retrieved 2026-04-09, License - CC BY-SA 3.0
+*/
+
+.button {
+  display: inline-block;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(135deg, var(--clr-accent), var(--clr-accent-2));
+  padding: 14px 36px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 4px 20px rgba(0, 210, 255, 0.25);
+  position: relative;
+  overflow: hidden;
+  margin: 8px 6px;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.button:hover::before {
+  left: 100%;
+}
+
+.button:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 8px 35px rgba(0, 210, 255, 0.4), 0 0 20px rgba(123, 47, 247, 0.3);
+}
+
+.button:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 10px rgba(0, 210, 255, 0.2);
+}
+
+/* Secondary / smaller button variant */
+.button-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--clr-card-border);
+  box-shadow: none;
+  padding: 10px 24px;
+  font-size: 0.9rem;
+}
+
+.button-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+}
+
+/* ===== Inputs ===== */
+.input {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid var(--clr-card-border);
+  border-radius: 14px;
+  padding: 12px 20px;
+  width: 120px;
+  text-align: center;
+  outline: none;
+  transition: all 0.3s ease;
+  -moz-appearance: textfield;
+}
+
+.input::-webkit-inner-spin-button,
+.input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input:focus {
+  border-color: var(--clr-accent);
+  box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ===== Score Display ===== */
+#score {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--clr-accent);
+  background: rgba(0, 210, 255, 0.1);
+  border: 1px solid rgba(0, 210, 255, 0.25);
+  border-radius: 50px;
+  padding: 8px 24px;
+  margin-top: 16px;
+  letter-spacing: 0.5px;
+}
+
+/* ===== Utility ===== */
 .pgb {
   border: none;
   padding: 8px 15px;
@@ -26,42 +259,21 @@ header {
   color: black;
   box-shadow: 0 0 25px #39a892, 0 0 50px #39a892;
 }
-.h1 {
-    padding: 8px 15px;
-    border-radius: 20px;
-    background-color: white;
-    width: 50%;
-    margin: auto;
-    margin-bottom: 20px;
-}
-/*
-Source - https://stackoverflow.com/a/710108
-Posted by TStamper, modified by community. See post 'Timeline' for change history
-Retrieved 2026-04-09, License - CC BY-SA 3.0
-*/
 
-.button {
-  font: bold 11px Arial;
-  text-decoration: none;
-  background-color: #EEEEEE;
-  color: #333333;
-  padding: 6px 6px 6px 6px;
-  border-top: 1px solid #CCCCCC;
-  border-right: 1px solid #333333;
-  border-bottom: 1px solid #333333;
-  border-left: 1px solid #CCCCCC;
-  border-radius: 5px;
-}
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  header,
+  .game-card {
+    padding: 30px 24px;
+    border-radius: 16px;
+  }
 
-.input {
-  font: bold 11px Arial;
-  text-decoration: none;
-  background-color: #EEEEEE;
-  color: #333333;
-  padding: 6px 6px 6px 6px;
-  border-top: 1px solid #CCCCCC;
-  border-right: 1 px solid #333333;
-  border-bottom: 1 px solid #333333;
-  border-left: 1px solid #CCCCCC;
-  border-radius: 5px;
+  h1, .h1 {
+    font-size: 2rem;
+  }
+
+  .button {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
 }
